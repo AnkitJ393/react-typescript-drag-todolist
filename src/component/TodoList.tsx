@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import { Todo } from '../model'
 import SingleTodo from './SingleTodo'
+import { Actions } from '../App';
 
-interface Props{
-    todos:Todo[],
-    setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
-}   
+type Props = {
+  todos: Todo[];
+  dispatch: React.Dispatch<Actions>; // Correct type
+};
 
-const TodoList:React.FC<Props> = ({todos,setTodos}) => {
+
+
+const TodoList:React.FC<Props> = ({todos,dispatch}) => {
+
+
   return (
     <div className='todos'>
         {
             todos.map((todo)=> {
-                return <SingleTodo key={todo.id} todo={todo} todos={todos} setTodos={setTodos}/>
+                return <SingleTodo key={todo.id} todo={todo} dispatch={dispatch}/>
             })  
         }
     </div>
